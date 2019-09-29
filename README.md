@@ -4,3 +4,5 @@
 
 #### $docker build . -t mymongodb:1.0
 #### $docker run -d --name mymongodb-container mymongodb:1.0
+
+#### $docker logs mynodejs-container
