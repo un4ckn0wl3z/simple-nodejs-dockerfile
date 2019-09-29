@@ -6,3 +6,7 @@
 #### $docker run -d --name mymongodb-container mymongodb:1.0
 
 #### $docker logs mynodejs-container
+
+
+#### docker build -f Dockerfile.prod . -t myreactapp:1.1
+#### $docker run -p 3001:80 --network shoppers -d --name myreactapp_prod myreactapp:1.1

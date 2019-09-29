@@ -4,7 +4,15 @@ const url = `mongodb://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSW
 console.log(url);
 const app = express();
 
-app.get("/", (req, res) => {
+app.use(function(req, res, next){
+    // allow CORS
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "X-Request-With, Content-Type");
+    next();
+});
+
+app.get("/api/products", (req, res) => {
     MongoClient.connect(url, (err, client) => {
         if (err) {
             throw err;
@@ -15,11 +23,12 @@ app.get("/", (req, res) => {
             if (err) {
                 throw err;
             }
-            res.send(result);
+            res.status(200).send(result);
+            client.close();
         });
     });
 });
 
-app.listen(3000, () => {
+app.listen(8000, () => {
     console.log("Server listening on port 3000");
 });
